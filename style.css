@@ -1,0 +1,77 @@
+@font-face {
+    font-family: 'Circe Regular';
+    src: url('circe-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Circe Bold';
+    src: url('circe-bold.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.hidden {
+    display: none;
+}
+
+body {
+    margin: 0;
+    font-family: 'Circe Regular', sans-serif;
+    background-color: #f5f1e8;
+}
+
+h1,h2,h3,p { margin: 0; }
+
+header {
+    height: 56px;
+    background: #1D1346;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.hedh {
+    color: white;
+    font-weight: 700;
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+    padding: 0;
+}
+
+.logo {
+    text-align: center;
+    margin: 16px 0;
+}
+
+.content {
+    padding: 0 16px;
+}
+
+.conp {
+    font-size: 18px;
+    line-height: 24px;
+    color: #1d1346;
+    margin: 0;
+    text-align: center;
+}
+
+.price {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 34px;
+    color: #1d1346;
+}
+
+.tsinfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #1d1346
+}

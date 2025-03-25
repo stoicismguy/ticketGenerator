@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уведомление об оплате</title>
+    <link rel="shortcut icon" href="https://qr.bilet.nspk.ru/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://qr.bilet.nspk.ru/circe-regular-webfont.70e2ea4fb032224b.woff2">
+</head>
+<body>
+    <header onclick="toggleHeader()">
+	   <h1 class="hedh">Уведомление об оплате</h1>
+    </header>
+    <div id="main">
+        <div class="logo">
+            <img src="logo.svg" />
+        </div>
+        <div class="content">
+            <p class="conp">Ваш проезд успешно оплачен!</p>
+            <div class="price">
+                <h1 style="font-size: 20px; font-weight: 800; margin-bottom: 6px; ">
+                    <span style="font-family: 'Circe Bold'; "><span id="type"></span>: </span>
+                    №<span id="number" style="font-family: 'Circe Bold'; ">6</span>
+                </h1>
+                <h1 style="font-family: 'Circe Bold'; font-size: 48px; font-size: 48px;
+                            line-height: 54px;
+                            margin-bottom: 17px;">
+                            29
+                    <span style="font-family: 'Circe Regular';font-weight: 400;">₽</span>
+                </h1>
+            </div>
+            <div class="tsinfo">
+                <p id="date" style="font-size: 18px;
+                line-height: 24px;
+                font-weight: 400;
+                text-align: center;
+                letter-spacing: .02em;">25.03.2025 12:49</p>
+                <p class="ts" style="font-size: 16px; color: #b5b5b5; text-align: center;">Т/С: <span id="ts_out"></span></p>
+                <p style="font-size: 18px; text-align: center; margin-top: 30px;">С момента оплаты прошло:</p>
+                <p id="diff" style="font-size: 32px;font-family: 'Circe Bold'; text-align: center; line-height: 32px; font-weight: 800;">42:33</p>
+                <div id="qrcode" style="margin: 30px auto; width: 374px; height: 374px; display: flex; align-items: center; background: transparent;"></div>
+                <p style="text-align: center; line-height: 24px; font-size: 18px;">Серия билета: <span style="font-family: 'Circe Bold';">QR200938000563</span></p>
+                <p style="text-align: center; line-height: 24px; font-size: 18px;">Номер билета: <span id="numeros" style="font-family: 'Circe Bold';">20250325074922290</span></p>
+                <p style="font-size: 18px; text-align: center; margin-top: 30px;">Предъявите контролеру QR-код.</p>
+                <p style="font-size: 18px; text-align: center;">Чтобы сохранить реквизиты билета, нажмите кнопку «Скачать»</p>
+                <button style="display: block; margin: 30px 0;
+                position: relative;
+                width: 100%;
+                height: 48px;
+                border: none;
+                background: #78B72A;
+                border-radius: 8px;
+                font-family: Circe, sans-serif;
+                color: #fff;
+                font-size: 18px;
+                line-height: 48px;
+                text-decoration: none;
+                text-align: center;">Скачать билет</button>
+            </div>
+        </div>
+    </div>
+        <!-- Форма для ввода данных -->
+    <div id="inputForm" style="padding: 0 20px;" class="hidden">
+        <h1>Введи данные для билета</h1>
+        <label>Тип транспорта:</label>
+            <select id="transportType" style="height: 30px;">
+                <option value="" disabled selected>Тип транспорта</option>
+                <option value="Трамвай">Трамвай</option>
+                <option value="Автобус">Автобус</option>
+            </select><br>
+            <label>Номер:</label>
+            <input type="text" id="tramNumber" style="height: 30px;" placeholder="Например: 6"><br>
+
+            <label>Т/С:</label>
+            <input type="text" id="ts" style="height: 30px;" placeholder="Например: 755"><br>
+
+            <button onclick="GenerateFullTicket()"
+            style="display: block; margin: 10px 0;
+            position: relative;
+            width: 100%;
+            height: 48px;
+            border: none;
+            background: #78B72A;
+            border-radius: 8px;
+            font-family: Circe, sans-serif;
+            color: #fff;
+            font-size: 18px;
+            line-height: 48px;
+            text-decoration: none;
+            text-align: center;">Сгенерировать билет</button>
+    </div>
+
+    <script src="qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
