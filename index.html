@@ -14,6 +14,10 @@
             rel="stylesheet"
             href="https://qr.bilet.nspk.ru/circe-regular-webfont.70e2ea4fb032224b.woff2"
         />
+        <script
+            src="https://unpkg.com/html5-qrcode"
+            type="text/javascript"
+        ></script>
     </head>
     <body>
         <header onclick="toggleHeader()">
@@ -221,8 +225,51 @@
             >
                 Сгенерировать билет
             </button>
-        </div>
+            <!-- Внутри #inputForm, под кнопкой "Сгенерировать билет" -->
+            <button
+                onclick="openScanner()"
+                style="
+                    display: block;
+                    margin: 10px 0;
+                    width: 100%;
+                    height: 48px;
+                    border: 2px solid #78b72a;
+                    background: transparent;
+                    border-radius: 8px;
+                    font-family: Circe, sans-serif;
+                    color: #78b72a;
+                    font-size: 18px;
+                    font-weight: bold;
+                    cursor: pointer;
+                "
+            >
+                Сканировать QR-код
+            </button>
 
+            <!-- Полноэкранный красивый сканер (Модальное окно) -->
+            <div id="scannerModal" class="scanner-modal hidden">
+                <div class="scanner-header">
+                    <h2>Наведите камеру на QR-код</h2>
+                    <button class="close-btn" onclick="closeScanner()">
+                        ✕
+                    </button>
+                </div>
+                <div class="scanner-body">
+                    <div id="reader"></div>
+                    <!-- Декоративная рамка видоискателя -->
+                    <div class="scanner-overlay">
+                        <div class="square">
+                            <div class="laser"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Скрытый фрейм для фоновой загрузки страницы НСПК -->
+        <iframe
+            id="nspkFrame"
+            style="display: none; width: 0; height: 0; border: none"
+        ></iframe>
         <script src="qrcode.min.js"></script>
         <script src="script.js"></script>
     </body>
