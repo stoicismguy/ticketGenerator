@@ -85,15 +85,82 @@ const onScanSuccess = async (decodedText, decodedResult) => {
 
         if (data.error) throw new Error(data.error);
 
-        // Дальше твой код разбора JSON (как мы делали изначально)
-        // В data придет чистый JSON ответ от НСПК!
+        const operation = Array.isArray(data.result)
+            ? data.result[0]
+            : data.result;
 
-        // Например, цена: data.ticketPrice или как там она в API называется
-        // ...
+        if (!operation) throw new Error('В ответе нет данных об операции');
+
+        localStorage.setItem('type', operation.vehicleTypeName || '');
+        localStorage.setItem('number', operation.routeNumber || '');
+        localStorage.setItem('ts', operation.vehicleNumber || '');
+
+        updateData();
+        showPaymentScreen(operation);
     } catch (error) {
         console.error('Ошибка:', error);
         alert('Не удалось получить данные о билете.');
     }
+};
+
+const formatMoney = (priceInKopecks) => {
+    const price = Number(priceInKopecks) / 100;
+    if (!Number.isFinite(price)) return '0 ₽';
+
+    return `${price.toLocaleString('ru-RU', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+    })} ₽`;
+};
+
+const formatOperationDate = (dateValue) => {
+    const date = new Date(dateValue);
+    if (Number.isNaN(date.getTime())) return '';
+
+    return date
+        .toLocaleString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+        })
+        .replace(',', '');
+};
+
+const showPaymentScreen = (operation) => {
+    const paymentScreen = document.getElementById('paymentScreen');
+    const main = document.getElementById('main');
+    const inputForm = document.getElementById('inputForm');
+    const header = document.getElementById('appHeader');
+    const type = operation.vehicleTypeName || '';
+    const routeNumber = operation.routeNumber || '';
+    const price = formatMoney(operation.price);
+    const date = formatOperationDate(operation.operationDateLocal);
+    const balance = (1000 + Math.random() * 4000).toLocaleString('ru-RU', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    });
+
+    document.getElementById('cardBalance').textContent = `${balance} ₽`;
+    document.getElementById('paymentDescription').textContent =
+        `Оплата поездки от ${date}, ${type} ${routeNumber}.`;
+    document.getElementById('paymentPrice').textContent = price;
+    document.getElementById('payButton').textContent = `Оплатить ${price}`;
+
+    main.classList.add('hidden');
+    inputForm.classList.add('hidden');
+    header.classList.add('hidden');
+    paymentScreen.classList.remove('hidden');
+};
+
+const showTicketAfterPayment = () => {
+    localStorage.setItem('generationTime', Date.now().toString());
+    updateData();
+
+    document.getElementById('paymentScreen').classList.add('hidden');
+    document.getElementById('appHeader').classList.remove('hidden');
+    document.getElementById('main').classList.remove('hidden');
 };
 
 const onScanFailure = (error) => {
@@ -153,6 +220,19 @@ const diffUpdater = () => {
 
 const updateData = () => {
     const genTimeStr = localStorage.getItem('generationTime');
+
+    const type = localStorage.getItem('type') || '';
+    const number = localStorage.getItem('number') || '';
+    const ts = localStorage.getItem('ts') || '';
+
+    const typeElem = document.getElementById('type');
+    const numberElem = document.getElementById('number');
+    const tsOutElem = document.getElementById('ts_out');
+
+    if (typeElem) typeElem.textContent = type;
+    if (numberElem) numberElem.textContent = number;
+    if (tsOutElem) tsOutElem.textContent = ts;
+
     if (!genTimeStr) return;
 
     const genTime = Number.parseInt(genTimeStr);
@@ -179,18 +259,6 @@ const updateData = () => {
     const numeros = `${year}${month}${day}074922290`;
     const numElem = document.getElementById('numeros');
     if (numElem) numElem.textContent = numeros;
-
-    const type = localStorage.getItem('type') || '';
-    const number = localStorage.getItem('number') || '';
-    const ts = localStorage.getItem('ts') || '';
-
-    const typeElem = document.getElementById('type');
-    const numberElem = document.getElementById('number');
-    const tsOutElem = document.getElementById('ts_out');
-
-    if (typeElem) typeElem.textContent = type;
-    if (numberElem) numberElem.textContent = number;
-    if (tsOutElem) tsOutElem.textContent = ts;
 
     diffUpdater();
     if (timerInterval) clearInterval(timerInterval);

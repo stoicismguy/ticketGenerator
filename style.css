@@ -5,6 +5,22 @@
     font-style: normal;
 }
 
+:root {
+    --page-background: #f5f1e8;
+    --main-purple: #1d1346;
+    --payment-card-background: #494949;
+    --payment-balance-card-background: #494949;
+    --payment-balance-text: #ffffff;
+    --payment-balance-caption: #d9d9d9;
+    --payment-recipient-card-background: #ff7991;
+    --payment-recipient-text: #ffffff;
+    --payment-text: #1d1346;
+    --payment-muted-text: #777777;
+    --payment-separator: #c8c8c8;
+    --payment-button-background: #ffd400;
+    --payment-button-text: #1d1346;
+}
+
 @font-face {
     font-family: 'Circe Bold';
     src: url('circe-bold.woff2') format('woff2');
@@ -19,7 +35,7 @@
 body {
     margin: 0;
     font-family: 'Circe Regular', sans-serif;
-    background-color: #f5f1e8;
+    background-color: var(--page-background);
 }
 
 h1,
@@ -31,7 +47,7 @@ p {
 
 header {
     height: 56px;
-    background: #1d1346;
+    background: var(--main-purple);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,6 +71,120 @@ header {
 
 .content {
     padding: 0 16px;
+}
+
+.payment-screen {
+    min-height: calc(100vh - 56px);
+    box-sizing: border-box;
+    padding: 14px 0 28px;
+    color: var(--payment-text);
+}
+
+.payment-logo {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 18px;
+}
+
+.payment-logo img {
+    width: 86px;
+    height: auto;
+}
+
+.payment-card {
+    width: 95%;
+    box-sizing: border-box;
+    margin: 0 auto 12px;
+    padding: 20px 20px;
+    border-radius: 20px;
+    background: var(--payment-card-background);
+}
+
+.payment-balance-card {
+    background: var(--payment-balance-card-background);
+    color: var(--payment-balance-text);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 25px 20px;
+}
+
+.payment-card-caption {
+    color: var(--payment-balance-caption);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+.payment-card-label {
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.payment-card-value {
+    margin-top: 3px;
+    font-family: 'Circe Bold', sans-serif;
+    font-size: 25px;
+    line-height: 30px;
+}
+
+.payment-recipient-card {
+    background: var(--payment-recipient-card-background);
+    color: var(--payment-recipient-text);
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.payment-details {
+    width: 90%;
+    margin: 27px auto 0;
+}
+
+.payment-description-title {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.payment-description {
+    margin-top: 7px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--payment-separator);
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.payment-price {
+    margin-top: 24px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--payment-separator);
+    font-family: 'Circe Bold', sans-serif;
+    font-size: 28px;
+    line-height: 34px;
+}
+
+.payment-commission {
+    margin-top: 4px;
+    color: var(--payment-muted-text);
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.payment-button {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 26px;
+    padding: 16px 0;
+    border: 0;
+    border-radius: 10px;
+    background: var(--payment-button-background);
+    color: var(--payment-button-text);
+    font:
+        18px 'Circe',
+        sans-serif;
+    cursor: pointer;
 }
 
 .conp {

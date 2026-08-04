@@ -20,7 +20,7 @@
         ></script>
     </head>
     <body>
-        <header onclick="toggleHeader()">
+        <header id="appHeader" onclick="toggleHeader()">
             <h1 class="hedh">Уведомление об оплате</h1>
         </header>
         <div id="main">
@@ -178,6 +178,36 @@
                 </div>
             </div>
         </div>
+        <main id="paymentScreen" class="payment-screen hidden">
+            <div class="payment-logo">
+                <img src="logo.svg" alt="СБП" />
+            </div>
+
+            <section class="payment-card payment-balance-card">
+                <p class="payment-card-caption">с Black</p>
+                <p id="cardBalance" class="payment-card-value">0 ₽</p>
+            </section>
+
+            <section class="payment-card payment-recipient-card">
+                Оплата проезда на bilet.nspk.ru
+            </section>
+
+            <section class="payment-details">
+                <p class="payment-description-title">Описание</p>
+                <p id="paymentDescription" class="payment-description">
+                    Оплата поездки
+                </p>
+                <p id="paymentPrice" class="payment-price">0 ₽</p>
+                <p class="payment-commission">Комиссия не взимается банком</p>
+                <button
+                    id="payButton"
+                    class="payment-button"
+                    onclick="showTicketAfterPayment()"
+                >
+                    Оплатить 0 ₽
+                </button>
+            </section>
+        </main>
         <!-- Форма для ввода данных -->
         <div id="inputForm" style="padding: 0 20px" class="hidden">
             <h1>Введи данные для билета v1.2</h1>
