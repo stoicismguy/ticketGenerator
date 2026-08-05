@@ -144,9 +144,12 @@ const showPaymentScreen = (operation) => {
 
     document.getElementById('cardBalance').textContent = `${balance} ₽`;
     document.getElementById('paymentDescription').textContent =
-        `Оплата поездки от ${date}, ${type} ${routeNumber}.`;
+        `Оплата поездки от ${date}, ${type} ${routeNumber}`;
     document.getElementById('paymentPrice').textContent = price;
-    document.getElementById('payButton').textContent = `Оплатить ${price}`;
+    const payButton = document.getElementById('payButton');
+    payButton.disabled = false;
+    payButton.classList.remove('is-loading');
+    payButton.textContent = `Оплатить ${price}`;
 
     main.classList.add('hidden');
     inputForm.classList.add('hidden');
@@ -155,12 +158,24 @@ const showPaymentScreen = (operation) => {
 };
 
 const showTicketAfterPayment = () => {
-    localStorage.setItem('generationTime', Date.now().toString());
-    updateData();
+    const payButton = document.getElementById('payButton');
+    if (payButton.disabled) return;
 
-    document.getElementById('paymentScreen').classList.add('hidden');
-    document.getElementById('appHeader').classList.remove('hidden');
-    document.getElementById('main').classList.remove('hidden');
+    payButton.disabled = true;
+    payButton.classList.add('is-loading');
+    payButton.setAttribute('aria-busy', 'true');
+    payButton.innerHTML =
+        '<span class="payment-loader" aria-hidden="true"></span>';
+
+    setTimeout(() => {
+        localStorage.setItem('generationTime', Date.now().toString());
+        updateData();
+
+        document.getElementById('paymentScreen').classList.add('hidden');
+        document.getElementById('appHeader').classList.remove('hidden');
+        document.getElementById('main').classList.remove('hidden');
+        payButton.setAttribute('aria-busy', 'false');
+    }, 1500);
 };
 
 const onScanFailure = (error) => {
