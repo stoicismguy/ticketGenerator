@@ -280,7 +280,7 @@
             <!-- Полноэкранный красивый сканер (Модальное окно) -->
             <div id="scannerModal" class="scanner-modal hidden">
                 <div class="scanner-header">
-                    <h2>Наведите камеру на QR-код</h2>
+                    <h2>Умная камера</h2>
                     <button class="close-btn" onclick="closeScanner()">
                         ✕
                     </button>
@@ -290,8 +290,32 @@
                     <!-- Декоративная рамка видоискателя -->
                     <div class="scanner-overlay">
                         <div class="square">
-                            <div class="laser"></div>
+                            <span class="corner corner-top-left"></span>
+                            <span class="corner corner-top-right"></span>
+                            <span class="corner corner-bottom-left"></span>
+                            <span class="corner corner-bottom-right"></span>
                         </div>
+                    </div>
+                    <div class="scanner-controls">
+                        <button type="button" aria-label="Открыть галерею">
+                            <img src="clip.svg" alt="" />
+                        </button>
+                        <button
+                            type="button"
+                            aria-label="Сканировать QR-код"
+                        ></button>
+                        <button
+                            type="button"
+                            aria-label="Дополнительные действия"
+                        >
+                            <img src="lightning.svg" alt="" />
+                        </button>
+                    </div>
+                </div>
+                <div class="scanner-info">
+                    <div class="scanner-info-content">
+                        <span>Что сканирует камера</span>
+                        <span class="scanner-new-badge">NEW</span>
                     </div>
                 </div>
             </div>
