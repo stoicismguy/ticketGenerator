@@ -295,3 +295,19 @@ const GenerateFullTicket = () => {
 };
 
 updateData();
+
+// Режим разработки: index.html#pay открывает экран оплаты без сканирования.
+if (window.location.hash.toLowerCase() === '#pay') {
+    const demoOperation = {
+        operationDateLocal: '2026-08-05T00:16:00',
+        price: 4200,
+        vehicleTypeName: 'Автобус',
+        routeNumber: '49',
+        vehicleNumber: '1205',
+    };
+
+    localStorage.setItem('type', demoOperation.vehicleTypeName);
+    localStorage.setItem('number', demoOperation.routeNumber);
+    localStorage.setItem('ts', demoOperation.vehicleNumber);
+    showPaymentScreen(demoOperation);
+}
