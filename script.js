@@ -144,7 +144,7 @@ const showPaymentScreen = (operation) => {
 
     document.getElementById('cardBalance').textContent = `${balance} ₽`;
     document.getElementById('paymentDescription').textContent =
-        `Оплата поездки от ${date}, ${type} ${routeNumber}`;
+        `Оплата поездки от ${date},\n${type} ${routeNumber}`;
     document.getElementById('paymentPrice').textContent = price;
     const payButton = document.getElementById('payButton');
     payButton.disabled = false;
@@ -197,7 +197,7 @@ const generateQRCode = () => {
         width: containerWidth,
         height: containerWidth,
         colorDark: '#000000',
-        colorLight: '#f5f2e9',
+        colorLight: '#f2f3f4',
         correctLevel: QRCode.CorrectLevel.M,
     });
 };
